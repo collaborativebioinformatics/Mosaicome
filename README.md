@@ -166,6 +166,9 @@ Rather than re-calling Sniffles at candidate sites, we built a BAM-only feature 
 #### Re-alignment to T2T to study FN
 Re-alignment to T2T. Then we examined a couple of regions that were classified as false negatives (deletion) from Sniffles/hg38. 
 See the 3rd photo at the right, only one read has this deletion and looks like less mapq from hg38 region vs. T2T region (lift over with UCSC)
+
+![igv](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/reg1.hg38.png)
+![igv](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/reg1.t2t.png)
 ![igv](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/notcalled1.png)
 
 #### **Validation**
