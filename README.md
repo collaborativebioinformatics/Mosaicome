@@ -164,7 +164,7 @@ To study why certain truth SVs were missed (FN) and how detected SVs (TP) differ
 Rather than re-calling Sniffles at candidate sites, we built a BAM-only feature extractor around breakpoints (and with adaptive windows) that outputs per-SV aggregates and optional per-read details: depth at edges and inside, read composition, robust MAPQ stats, an identity proxy from `NM`, soft-clip burden and breakpoint-specific soft-clip fractions, split-read prevalence (`SA:Z`), indel load per kb, and strand balance. These tables are now the substrate for PCA/ML and principled tuning of mapping/calling parameters, with a quick interpretation rubric for DEL/INS and for understanding typical FN signatures.
 
 #### Re-alignment to T2T to study FN
-Re-alignment to T2T. Then we examined a couple of regions that were classified as false negatives (deletion) from sniffles/hg38. 
+Re-alignment to T2T. Then we examined a couple of regions that were classified as false negatives (deletion) from Sniffles/hg38. 
 See the 3rd photo at the right, only one read has this deletion and looks like less mapq from hg38 region vs. T2T region (lift over with UCSC)
 ![igv](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/notcalled1.png)
 
