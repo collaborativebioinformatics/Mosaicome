@@ -150,6 +150,12 @@ We tested multiple filters from Sniffles2
 | 7 | 70 | 222 | 84.34% | 62.94% | 72.08% | --mosaic-af-min 0.01 --minsupport 3 --mapq 18 (USER) + mosaic_min_reads = 2 for DEL and INS (INTERNAL) + minsvlen FILTER deactivated if SUPPORT >= 10 (INTERNAL)" |
 | 8 | 34 | 320 | 89.13% | 46.78% | 61.18% | Default + winnowmap |
 
+<img width="1389" height="690" alt="image" src="https://github.com/user-attachments/assets/566305cd-254a-4f67-8098-304f9abbf71a" />
+
+<img width="1390" height="690" alt="image" src="https://github.com/user-attachments/assets/81fbc41f-47af-44ef-aa7e-b96bced85390" />
+
+
+
 #### Other SV calling tools
 We tested other tools (CuteSV) to compare the results from the benchmark
 
