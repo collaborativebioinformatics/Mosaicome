@@ -80,7 +80,7 @@ We have a high-quality benchmark dataset derived from assemblies
 ---
 
 ### 🗺️ **Project Roadmap**
-![flowchart](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/workflow.png?raw=true)
+![flowchart](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/docs/workflow.png?raw=true)
 
 Our progress will be tracked through the following key phases and milestones.
 
@@ -174,9 +174,9 @@ Re-alignment to T2T. Then we examined a couple of regions that were classified a
 See the bottom figure, only one read has this deletion.
 Top figure: hg38 region and Middle figure: T2t region
 
-![igv](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/reg1.hg38.png)
-![igv](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/reg1.t2t.png)
-![igv](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/notcalled1.png)
+![igv](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/docs/reg1.hg38.png)
+![igv](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/docs/reg1.t2t.png)
+![igv](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/docs/notcalled1.png)
 
 #### **Validation**
 🚧
