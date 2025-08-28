@@ -80,7 +80,7 @@ We have a high-quality benchmark dataset derived from assemblies
 ---
 
 ### 🗺️ **Project Roadmap**
-![alt text](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/workflow.png?raw=true)
+![flowchart](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/workflow.png?raw=true)
 
 Our progress will be tracked through the following key phases and milestones.
 
@@ -163,6 +163,10 @@ We tested other tools (CuteSV) to compare the results from the benchmark
 To study why certain truth SVs were missed (FN) and how detected SVs (TP) differ, we extract quantitative evidence directly from the BAM around each breakpoint—without re-calling Sniffles.
 Rather than re-calling Sniffles at candidate sites, we built a BAM-only feature extractor around breakpoints (and with adaptive windows) that outputs per-SV aggregates and optional per-read details: depth at edges and inside, read composition, robust MAPQ stats, an identity proxy from `NM`, soft-clip burden and breakpoint-specific soft-clip fractions, split-read prevalence (`SA:Z`), indel load per kb, and strand balance. These tables are now the substrate for PCA/ML and principled tuning of mapping/calling parameters, with a quick interpretation rubric for DEL/INS and for understanding typical FN signatures.
 
+#### Re-alignment to T2T to study FN
+Re-alignment to T2T. Then we examined a couple of regions that were classified as false negatives (deletion) from sniffles/hg38. 
+See the 3rd photo at the right, only one read has this deletion and looks like less mapq from hg38 region vs. T2T region (lift over with UCSC)
+![igv](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/notcalled1.png)
 
 #### **Validation**
 🚧
