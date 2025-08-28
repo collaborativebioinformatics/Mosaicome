@@ -64,7 +64,7 @@ This project will leverage a modern, open-source technology stack.
 | **Language** | `Python 3.12+`                                      | Core programming language             |
 | **Data Handling** | `Pandas`, `NumPy`                                  | Data manipulation & numerical analysis|
 | **Alignment** | `Minimap2`, `Winnowmap`, `abpoa`                        | Data mapping & assembly             |
-| **SV calling** | `Sniffles2`                                  | Data manipulation & numerical analysis|
+| **SV calling** | `Sniffles2`, `CureSV`                              | Data manipulation & numerical analysis|
 | **Visualization** | `Matplotlib`, `IGV`                            | Plotting results & data exploration   |
 | **Development** | `Jupyter Lab`, `VS Code`                           | Interactive analysis & coding         |
 | **Collaboration** | `Git`, `GitHub`                                    | Version control & project management  |
@@ -112,11 +112,12 @@ Strategies:
  - Impact of Read Quality on SV Calling
    On the way to finding a better strategy for recalling structural variants (SVs),  
 we observed that the quality of ONT reads plays a crucial role.  
+
+
+#### **Development**
 Below is a comparison of SV calling results between using **all mapped reads (QV > 10)** and restricting the analysis to **reads with Phred quality > 20**.
 
----
-
-## SV Calling Performance Comparison
+#### SV Calling Performance Comparison (alignment options)
 
 | Dataset / Mapping Strategy       | Alignments (Primary / Secondary / Supplementary) | SVs Found | FP | FN  | Precision | Recall | F1    |
 |----------------------------------|--------------------------------------------------|-----------|----|-----|-----------|--------|-------|
@@ -124,17 +125,44 @@ Below is a comparison of SV calling results between using **all mapped reads (QV
 | All 369,812 reads, minimap2 **lr:hq**   | 369,812 / 285,330 / 46,993                      | 10,555    | 34 | 314 | 89.34%    | 47.58% | 62.09 |
 | QV > 20 (160,134 reads), minimap2 **lr:hq** | 160,134 / 117,005 / 21,019                      | 5,253     | 23 | 326 | 92.23%    | 45.58% | 61.01 |
 
----
-
-## Interpretation
+##### Interpretation
 
 From this comparison, we see that using all reads with minimal quality filtering (QV > 10) leads to a large excess of predicted SVs (36,741), almost **7× more than when using only QV > 20 reads (5,253 SVs)**.  
 However, this higher callset does **not substantially improve recall**: the recall rate is only **50%** with all reads versus **45%** with QV > 20 reads.  
 
 Thus, although low-quality reads inflate the number of SV calls, they do not yield proportionally better sensitivity, and may instead increase false positives.
 
-#### **Development**
-🚧
+#### SV Calling Performance Comparison (different aligners)
+Evaluate two aligners (minimap2, winnowmap) × three MAPQ filters (0/20/40) × five Sniffles2 profiles (very_sens, sensitive, balanced, strict, very_strict), then benchmark each callset with Truvari and optionally merge callsets with SURVIVOR (union, intersection). 
+To explore precision/recall extremes via union ( recall) and intersection ( precision).
+
+#### Filtering options
+We tested multiple filters from Sniffles2
+|#test | FP  | FN | Precision | Recall | F1 | Notes |
+|------|-----|----|-----------|--------|----|--------|
+| Best diff (7-1) | 40 | -75 | -6.62% | 12.52% | 7.21% |  |
+| 1 | 30 | 297 | 90.96% | 50.42% | 64.88% | Default |
+| 2 | 46 | 259 | 88.08% | 56.76% | 69.04% | --mosaic-af-min 0.01 (USER) |
+| 3 | 70 | 224 | 84.27% | 62.60% | 71.84% | --mosaic-af-min 0.01 --minsupport 3 (USER) + mosaic_min_reads = 2 for DEL and INS (INTERNAL) |
+| 4 | 70 | 223 | 84.30% | 62.77% | 71.96% | --mosaic-af-min 0.01 --minsupport 3 (USER) + mosaic_min_reads = 2 for DEL and INS (INTERNAL) + minsvlen FILTER deactivated if SUPPORT >= 10 (INTERNAL) |
+| 5 | 34 | 314 | 89.34% | 47.58% | 62.09% | Default + minimap2 lr:hq (instead of map-ont) with all reads from original BAM file |
+| 6 | 23 | 326 | 92.23% | 45.58% | 61.01% | Default + minimap2 lr:hq (instead of map-ont) with all reads from original BAM file, BUT only with reads with Q>20, 160134 reads less than half of tatal reads |
+| 7 | 70 | 222 | 84.34% | 62.94% | 72.08% | --mosaic-af-min 0.01 --minsupport 3 --mapq 18 (USER) + mosaic_min_reads = 2 for DEL and INS (INTERNAL) + minsvlen FILTER deactivated if SUPPORT >= 10 (INTERNAL)" |
+| 8 | 34 | 320 | 89.13% | 46.78% | 61.18% | Default + winnowmap |
+
+#### Other SV calling tools
+We tested other tools (CuteSV) to compare the results from the benchmark
+
+|Tool | version | FP | FN | Precision | Recall | F1 |
+|-----|---------|----|----|-----------|--------|----|
+|cuteSV | v2 |  8  |   84  |  267 |  80% |  55% | 65% |
+|cuteSV | v2  | 9  |   26  |  382  | 89% |  36% |  52% |
+|SURVIVOR | merge with Sniffles and cuteSV | 10 | 55 | 278 | 85% | 53% | 66% |
+
+#### BAM-derived feature extraction (no re-calling Sniffles)
+To study why certain truth SVs were missed (FN) and how detected SVs (TP) differ, we extract quantitative evidence directly from the BAM around each breakpoint—without re-calling Sniffles.
+Rather than re-calling Sniffles at candidate sites, we built a BAM-only feature extractor around breakpoints (and with adaptive windows) that outputs per-SV aggregates and optional per-read details: depth at edges and inside, read composition, robust MAPQ stats, an identity proxy from `NM`, soft-clip burden and breakpoint-specific soft-clip fractions, split-read prevalence (`SA:Z`), indel load per kb, and strand balance. These tables are now the substrate for PCA/ML and principled tuning of mapping/calling parameters, with a quick interpretation rubric for DEL/INS and for understanding typical FN signatures.
+
 
 #### **Validation**
 🚧
