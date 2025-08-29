@@ -113,6 +113,20 @@ Strategies:
    On the way to finding a better strategy for recalling structural variants (SVs),  
 we observed that the quality of ONT reads plays a crucial role.  
 
+#### SV Calling Performance Comparison (alignment options)
+
+| Dataset / Mapping Strategy       | Alignments (Primary / Secondary / Supplementary) | SVs Found | FP | FN  | Precision | Recall | F1    |
+|----------------------------------|--------------------------------------------------|-----------|----|-----|-----------|--------|-------|
+| All 369,812 reads, minimap2 **map-ont** | 369,812 / 319,549 / 51,286                      | **36,741**    | 30 | 297 | 90.96%    | **50.42%** | 64.88 |
+| All 369,812 reads, minimap2 **lr:hq**   | 369,812 / 285,330 / 46,993                      | 10,555    | 34 | 314 | 89.34%    | 47.58% | 62.09 |
+| QV > 20 (160,134 reads), minimap2 **lr:hq** | 160,134 / 117,005 / 21,019                      | **5,253**     | 23 | 326 | 92.23%    | **45.58%** | 61.01 |
+
+##### Interpretation
+
+From this comparison, we see that using all reads with minimal quality filtering (QV > 10) leads to a large excess of predicted SVs (36,741), almost **7× more than when using only QV > 20 reads (5,253 SVs)**.  
+However, this higher callset does **not substantially improve recall**: the recall rate is only **50%** with all reads versus **45%** with QV > 20 reads.  
+
+Thus, although low-quality reads inflate the number of SV calls, they do not yield proportionally better sensitivity, and may instead increase false positives.
 
 #### **Region analysis of FN vs TP**
 
@@ -165,21 +179,6 @@ This metric is the **median fraction of inserted bases** among reads that contai
 </p>
 
 Below is a comparison of SV calling results between using **all mapped reads (QV > 10)** and restricting the analysis to **reads with Phred quality > 20**.
-
-#### SV Calling Performance Comparison (alignment options)
-
-| Dataset / Mapping Strategy       | Alignments (Primary / Secondary / Supplementary) | SVs Found | FP | FN  | Precision | Recall | F1    |
-|----------------------------------|--------------------------------------------------|-----------|----|-----|-----------|--------|-------|
-| All 369,812 reads, minimap2 **map-ont** | 369,812 / 319,549 / 51,286                      | **36,741**    | 30 | 297 | 90.96%    | **50.42%** | 64.88 |
-| All 369,812 reads, minimap2 **lr:hq**   | 369,812 / 285,330 / 46,993                      | 10,555    | 34 | 314 | 89.34%    | 47.58% | 62.09 |
-| QV > 20 (160,134 reads), minimap2 **lr:hq** | 160,134 / 117,005 / 21,019                      | **5,253**     | 23 | 326 | 92.23%    | **45.58%** | 61.01 |
-
-##### Interpretation
-
-From this comparison, we see that using all reads with minimal quality filtering (QV > 10) leads to a large excess of predicted SVs (36,741), almost **7× more than when using only QV > 20 reads (5,253 SVs)**.  
-However, this higher callset does **not substantially improve recall**: the recall rate is only **50%** with all reads versus **45%** with QV > 20 reads.  
-
-Thus, although low-quality reads inflate the number of SV calls, they do not yield proportionally better sensitivity, and may instead increase false positives.
 
 #### **Development**
 
