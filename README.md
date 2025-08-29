@@ -114,6 +114,33 @@ Strategies:
 we observed that the quality of ONT reads plays a crucial role.  
 
 
+#### **Region analysis of FN vs TP**
+
+#### QC — MAPQ Distribution
+TP reads cluster tightly near **MAPQ≈60**, while FN shows a bimodal mix with a **large peak near 0** and a smaller one near 60. Means diverge (**FN≈39** vs **TP≈57**; medians ≈60 for both) with **p ≪ 1e-10** for Mann–Whitney and Welch’s t-test. We see many FNs come from **low/ambiguous mappings**. MAPQ-based filtering or re-alignment could recover signal. And that's what we tried below!!
+![MAPQ Distribution: TP vs FN](docs/mapq.png)
+
+#### DELs — Coverage in interval vs flanks
+
+**Histogram (left):** In TP the coverage ratio of interval/flanks of the BP shows a **strong tail at ratios <0.8** (true coverage drop inside the interval). FN **clusters near 1.0–1.1**, i.e., little to no drop.
+**Boxplot (right):** Medians **TP≈0.63** vs **FN≈0.99** (Δ≈0.36), **p ≪ 1e-10**. We note that TP exhibits a clear **coverage drop**; FN remains \~flanks ⇒ weak/absent signal.
+
+<p float="left">
+  <img src="docs/coverage_ratio.png" width="49%" alt="DELs coverage ratio histogram">
+  <img src="docs/coverage_ratio_box.png"  width="49%" alt="DELs coverage ratio boxplot">
+</p>
+
+
+#### DELs — Coverage vs deletion signal **inside** the interval
+
+There’s a clear **negative relationship**: when coverage ratio drops (<0.8), the **per-read deletion fraction** inside the interval rises (up to \~1). **TP** dominate this region; **FN** cluster near **ratio≈1** with low fractions (<0.1). Also, deletion enrichment is **high for TP** when coverage drops (ratio <0.8), reaching values well >1; **FN** stay near **0–5** and stay around ratio \~1. **Takeaway:** enrichment is a robust signal for **excess Deletion events** in the interval vs flanks.
+
+<p float="left">
+  <img src="docs/deletion_fraction_mean.png" width="49%" alt="Coverage ratio vs deletion fraction inside interval">
+  <img src="docs/deletion_ratio_mean.png" width="49%" alt="Coverage ratio vs interval-to-flanks deletion fraction ratio">
+</p>
+
+
 #### **Development**
 Below is a comparison of SV calling results between using **all mapped reads (QV > 10)** and restricting the analysis to **reads with Phred quality > 20**.
 
