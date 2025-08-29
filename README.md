@@ -122,7 +122,7 @@ TP reads cluster tightly near **MAPQ≈60**, while FN shows a bimodal mix with a
 
 #### DELs — Coverage in interval vs flanks
 
-**Histogram (left):** In TP the coverage ratio of interval/flanks of the BP shows a **strong tail at ratios <0.8** (true coverage drop inside the interval). FN **clusters near 1.0–1.1**, i.e., little to no drop.
+**Histogram (left):** In TP the coverage ratio of interval/flanks of the BP shows a **strong tail at ratios <0.8**, which means that true coverage drop inside the interval. FN **clusters near 1.0–1.1**, i.e., little to no drop.
 **Boxplot (right):** Medians **TP≈0.63** vs **FN≈0.99** (Δ≈0.36), **p ≪ 1e-10**. We note that TP exhibits a clear **coverage drop**; FN remains \~flanks ⇒ weak/absent signal.
 
 <p float="left">
@@ -142,7 +142,7 @@ There’s a clear **negative relationship**: when coverage ratio drops (<0.8), t
 
 #### **INS — Insertion prevalence in windows (outside BP)**
 
-We examined the fraction of reads around the breakpoint with at least one insertion.
+We examined the prevalence (fraction) of reads around the breakpoint with at least one insertion.
 **Plots:** Left = histogram. Right = KDE density (area≈1 per group). We note a pattern of **TP** shift to **high prevalence (≈0.7–1.0)**, while **FN** cluster **lower (≈0–0.4)**. Mann–Whitney U **p = 0.003** indicates a significant difference between TP and FN; with a higher median in TP (+0.156), insertion prevalence near the breakpoint is a useful discriminator of true INS in this dataset.
 
 
@@ -151,6 +151,15 @@ We examined the fraction of reads around the breakpoint with at least one insert
   <img src="docs/ins_kde.png"  width="49%" alt="INS: insertion prevalence in windows — KDE density">
 </p>
 
+#### **INS — Fraction of INS bases in windows (outside BP)**
+
+This metric is the **median fraction of inserted bases** among reads that contain ≥1 insertion in the breakpoint windows. **Plots:** Left = histogram (fraction of SVs per bin). Right = horizontal boxplot. **Stats:** Mann–Whitney U **p = 4.61e-07**; medians **TP = 0.383** vs **FN = 0.134** (**Δ = +0.248**).
+**Takeaway:** When present, TP insertions occupy a **larger share** of the read around the BP, whereas FN have **small/dispersed insertions**. This feature is coverage-robust and a strong discriminator of true INS.
+
+<p float="left">
+  <img src="docs/ins_frac_hist.png" width="49%" alt="INS: insertion fraction in windows (outside BP)">
+  <img src="docs/ins_frac_box.png"  width="49%" alt="INS: insertion fraction in windows — boxplot">
+</p>
 
 #### **Development**
 Below is a comparison of SV calling results between using **all mapped reads (QV > 10)** and restricting the analysis to **reads with Phred quality > 20**.
