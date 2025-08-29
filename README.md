@@ -197,11 +197,11 @@ We tested multiple filters from Sniffles2
 #### Other SV calling tools
 We tested other tools (CuteSV) to compare the results from the benchmark
 
-|Tool | version | FP | FN | Precision | Recall | F1 |
-|-----|---------|----|----|-----------|--------|----|
-|cuteSV | v2 |  84  |  267 |  80% |  55% | 65% |
-|cuteSV | v2  |   26  |  382  | 89% |  36% |  52% |
-|SURVIVOR | merge Sniffles (default) and cuteSV  | 55 | 278 | 85% | 53% | 66% |
+|Tool | version | FP | FN | Precision | Recall | F1 | Notes |
+|-----|---------|----|----|-----------|--------|----|-------|
+|cuteSV | v2.1.2 |  84  |  267 |  80% |  55% | 65% |All SVs are included| 
+|cuteSV | v2.1.2  |   26  |  382  | 89% |  36% |  52% |Only PASS SVs are included | 
+|SURVIVOR merge | v1.0.7 | 55 | 278 | 85% | 53% | 66% | Sniffles default with cute SV (All)| 
 
 #### BAM-derived feature extraction (no re-calling Sniffles)
 To study why certain truth SVs were missed (FN) and how detected SVs (TP) differ, we extract quantitative evidence directly from the BAM around each breakpoint—without re-calling Sniffles.
