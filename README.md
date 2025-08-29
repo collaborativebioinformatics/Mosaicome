@@ -188,18 +188,27 @@ To explore precision/recall extremes via union ( recall) and intersection ( prec
 
 #### Filtering options
 We tested multiple filters from Sniffles2
-|#test | FP  | FN | Precision | Recall | F1 | Notes |
-|------|-----|----|-----------|--------|----|--------|
-| Best diff (7-1) | 40 | -75 | -6.62% | 12.52% | 7.21% |  |
-| 1 | 30 | 297 | 90.96% | 50.42% | 64.88% | Default |
-| 2 | 46 | 259 | 88.08% | 56.76% | 69.04% | --mosaic-af-min 0.01 (USER) |
-| 3 | 70 | 224 | 84.27% | 62.60% | 71.84% | --mosaic-af-min 0.01 --minsupport 3 (USER) + mosaic_min_reads = 2 for DEL and INS (INTERNAL) |
-| 4 | 70 | 223 | 84.30% | 62.77% | 71.96% | --mosaic-af-min 0.01 --minsupport 3 (USER) + mosaic_min_reads = 2 for DEL and INS (INTERNAL) + minsvlen FILTER deactivated if SUPPORT >= 10 (INTERNAL) |
-| 5 | 34 | 314 | 89.34% | 47.58% | 62.09% | Default + minimap2 lr:hq (instead of map-ont) with all reads from original BAM file |
-| 6 | 23 | 326 | 92.23% | 45.58% | 61.01% | Default + minimap2 lr:hq (instead of map-ont) with all reads from original BAM file, BUT only with reads with Q>20, 160134 reads less than half of tatal reads |
-| 7 | 70 | 222 | 84.34% | 62.94% | 72.08% | --mosaic-af-min 0.01 --minsupport 3 --mapq 18 (USER) + mosaic_min_reads = 2 for DEL and INS (INTERNAL) + minsvlen FILTER deactivated if SUPPORT >= 10 (INTERNAL) |
-| 8 | 34 | 320 | 89.13% | 46.78% | 61.18% | Default + winnowmap |
-| 19 | 41 | 281 | 88.58% | 53.09% | 66.39% | minimap2 lr:hq with >Q20 reads and Sniffle2Mod --mosaic-af-min 0.01 --minsupport 3 --mapq 18 (USER) + mosaic_min_reads = 2 for DEL and INS (INTERNAL) if (precise sd_len and sd_pos is low) + minsvlen FILTER deactivated if SUPPORT >= 10 (INTERNAL) | 
+|# Test | FP  | FN | Precision | Recall | F1 | Notes|
+|--|--|--|--|--|--|--|
+|1 | 30 | 297 | 90.96% | 50.42% | 64.88% | default|
+|2 | 46 | 259 | 88.08% | 56.76% | 69.04% | --mosaic-af-min 0.01 (USER)|
+|3 | 70 | 224 | 84.27% | 62.60% | 71.84% | "--mosaic-af-min 0.01 --minsupport 3 (USER) + mosaic_min_reads = 2 for DEL and INS (INTERNAL)"|
+|4 | 70 | 223 | 84.30% | 62.77% | 71.96% | "--mosaic-af-min 0.01 --minsupport 3 (USER) + mosaic_min_reads = 2 for DEL and INS (INTERNAL)+ minsvlen FILTER deactivated if SUPPORT >= 10 (INTERNAL)"|
+|5 | 34 | 314 | 89.34% | 47.58% | 62.09% | minimap2 lr:hq + default|
+|6 | 23 | 326 | 92.23% | 45.58% | 61.01% | reads Q20 +minimap2 lr:hq + default|
+|7 | 27 | 324 | 91.06% | 45.91% | 61.04% | winnowmap (parameters) + default|
+|8 | 36 | 322 | 88.50% | 46.24% | 60.75% | winnowmap (parameters) + default|
+|9 | 37 | 328 | 87.99% | 45.24% | 59.76% | winnowmap (parameters) + default|
+|10 | 38 | 327 | 87.74% | 45.41% | 59.85% | winnowmap (parameters) + default|
+|11 | 36 | 315 | 88.75% | 47.41% | 61.80% | winnowmap (parameters) + default|
+|12 | 70 | 222 | 84.34% | 62.94% | 72.08% | "--mosaic-af-min 0.01 --minsupport 3 --mapq 18 (USER) + mosaic_min_reads = 2 for DEL and INS (INTERNAL) + minsvlen FILTER deactivated if SUPPORT >= 10 (INTERNAL)"|
+|13 | 34 | 320 | 89.13% | 46.78% | 61.18% | winnowmap (parameters) + default|
+|14* | 54 | 227 | 87.53% | 62.10% | 72.66% | "--mosaic-af-min 0.01 --minsupport 3 --mapq 18 (USER) + mosaic_min_reads = 2 for DEL and INS (INTERNAL) if precise + minsvlen FILTER deactivated if SUPPORT >= 10 (INTERNAL)"|
+|15 | 48 | 230 | 88.49% | 61.60% | 72.64% | "--mosaic-af-min 0.01 --minsupport 3 --mapq 18 (USER) + mosaic_min_reads = 2 for DEL and INS (INTERNAL) if (precise sd_len and sd_pos is low) + minsvlen FILTER deactivated if SUPPORT >= 10 (INTERNAL)"|
+|16 | 84 | 267 | 80% | 55% | 65% | cuteSV -t 12 --genotype --report_readid --min_support 3 --min_size 50 bam/mosaic_data_chr21.bam ref/chr21.fasta cutesv/chr21.cutesv2.vcf ./cutesv/|
+|17 | 26 | 382 | 89% | 36% | 52% | cuteSV -t 12 --genotype --report_readid --min_support 3 --min_size 50 bam/mosaic_data_chr21.bam ref/chr21.fasta cutesv/chr21.cutesv2.vcf ./cutesv/|
+|18 | 55 | 278 | 85% | 53% | 66% | SURVIVOR merge samples.txt 1000 1 1 0 0 50|
+|19 | 41 | 281 | 88.58% | 53.09% | 66.39% | "reads Q20 +minimap2 lr:hq  +  --mosaic-af-min 0.01 --minsupport 3 --mapq 18 (USER) +  mosaic_min_reads = 2 for DEL and INS (INTERNAL) if (precise sd_len and sd_pos is low) +  minsvlen FILTER deactivated if SUPPORT >= 10 (INTERNAL)"|
 
 <img width="1389" height="690" alt="image" src="https://github.com/user-attachments/assets/566305cd-254a-4f67-8098-304f9abbf71a" />
 
