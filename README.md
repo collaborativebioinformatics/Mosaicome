@@ -86,9 +86,9 @@ Our progress will be tracked through the following key phases and milestones.
 
 | Phase | Status | Key Milestones                                                                 |
 | :---: | :----: | ------------------------------------------------------------------------------ |
-| **1** |  `⏳`  | **Exploration & Strategy** <br> ⚫ Data Analysis <br> ⚫ Steps |
-| **2** |  `⚪`  | **Development & Prototyping** <br> ⚫ Steps <br> ⚫ Steps |
-| **3** |  `⚪`  | **Refinement & Validation** <br> ⚫ Steps <br> ⚫ Validation <br> ⚫ Final Documentation |
+| **1** |  `✅`  | **Exploration & Strategy** <br> ⚫ Data Analysis <br> ⚫ Steps |
+| **2** |  `✅`  | **Development & Prototyping** <br> ⚫ Steps <br> ⚫ Steps |
+| **3** |  `⏳`  | **Refinement & Validation** <br> ⚫ Steps <br> ⚫ Validation <br> ⚫ Final Documentation |
 
 *Status Key: `⚪` Not Started, `⏳` In Progress, `✅` Completed*
 
@@ -211,9 +211,7 @@ We tested multiple filters from Sniffles2
 |19 | 41 | 281 | 88.58% | 53.09% | 66.39% | "reads Q20 +minimap2 lr:hq  +  --mosaic-af-min 0.01 --minsupport 3 --mapq 18 (USER) +  mosaic_min_reads = 2 for DEL and INS (INTERNAL) if (precise sd_len and sd_pos is low) +  minsvlen FILTER deactivated if SUPPORT >= 10 (INTERNAL)"|
 
 <img width="1389" height="690" alt="image" src="https://github.com/user-attachments/assets/566305cd-254a-4f67-8098-304f9abbf71a" />
-
 <img width="1390" height="690" alt="image" src="https://github.com/user-attachments/assets/81fbc41f-47af-44ef-aa7e-b96bced85390" />
-
 
 
 #### Other SV calling tools
@@ -224,6 +222,7 @@ We tested other tools (cuteSV) and compared to the benchmark set
 |cuteSV | v2.1.2 |  84  |  267 |  80% |  55% | 65% |All SVs are included| 
 |cuteSV | v2.1.2  |   26  |  382  | 89% |  36% |  52% |Only PASS SVs are included | 
 |SURVIVOR merge | v1.0.7 | 55 | 278 | 85% | 53% | 66% | Sniffles default with cute SV (All)| 
+
 ### Comparing Sniffles FNs vs. cuteSV FNs (before and after filtering):
 
 - 251 FNs are common between Sniffles and cuteSV (All SVs)
@@ -258,10 +257,5 @@ We re-aligned to the T2T-CHM13 reference genome to evaluate the effect of the re
     ```
 2.  **Set up the environment:**
     ```bash
-    # Command to be added
+    conda create --name mosaicome bioconda::winnowmap bioconda::sniffles bioconda::samtools bioconda::bcftools bioconda::truvari bioconda::minimap2
     ```
-3.  **Run the pipeline:**
-    ```bash
-    # Command to be added
-    ```
-
