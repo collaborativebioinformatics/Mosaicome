@@ -164,7 +164,6 @@ This metric is the **median fraction of inserted bases** among reads that contai
   <img src="docs/ins_frac_box.png"  width="49%" alt="INS: insertion fraction in windows — boxplot">
 </p>
 
-#### **Development**
 Below is a comparison of SV calling results between using **all mapped reads (QV > 10)** and restricting the analysis to **reads with Phred quality > 20**.
 
 #### SV Calling Performance Comparison (alignment options)
@@ -181,6 +180,8 @@ From this comparison, we see that using all reads with minimal quality filtering
 However, this higher callset does **not substantially improve recall**: the recall rate is only **50%** with all reads versus **45%** with QV > 20 reads.  
 
 Thus, although low-quality reads inflate the number of SV calls, they do not yield proportionally better sensitivity, and may instead increase false positives.
+
+#### **Development**
 
 #### SV Calling Performance Comparison (different aligners)
 Evaluate two aligners (minimap2, winnowmap) × three MAPQ filters (0/20/40) × five Sniffles2 profiles (very_sens, sensitive, balanced, strict, very_strict), then benchmark each callset with Truvari and optionally merge callsets with SURVIVOR (union, intersection). 
@@ -204,7 +205,7 @@ We tested multiple filters from Sniffles2
 |12 | 70 | 222 | 84.34% | 62.94% | 72.08% | "--mosaic-af-min 0.01 --minsupport 3 --mapq 18 (USER) + mosaic_min_reads = 2 for DEL and INS (INTERNAL) + minsvlen FILTER deactivated if SUPPORT >= 10 (INTERNAL)"|
 |13 | 34 | 320 | 89.13% | 46.78% | 61.18% | winnowmap (parameters) + default|
 |14* | 54 | 227 | 87.53% | 62.10% | 72.66% | "--mosaic-af-min 0.01 --minsupport 3 --mapq 18 (USER) + mosaic_min_reads = 2 for DEL and INS (INTERNAL) if precise + minsvlen FILTER deactivated if SUPPORT >= 10 (INTERNAL)"|
-|15 | 48 | 230 | 88.49% | 61.60% | 72.64% | "--mosaic-af-min 0.01 --minsupport 3 --mapq 18 (USER) + mosaic_min_reads = 2 for DEL and INS (INTERNAL) if (precise sd_len and sd_pos is low) + minsvlen FILTER deactivated if SUPPORT >= 10 (INTERNAL)"|
+|15* | 48 | 230 | 88.49% | 61.60% | 72.64% | "--mosaic-af-min 0.01 --minsupport 3 --mapq 18 (USER) + mosaic_min_reads = 2 for DEL and INS (INTERNAL) if (precise sd_len and sd_pos is low) + minsvlen FILTER deactivated if SUPPORT >= 10 (INTERNAL)"|
 |16 | 84 | 267 | 80% | 55% | 65% | cuteSV -t 12 --genotype --report_readid --min_support 3 --min_size 50 bam/mosaic_data_chr21.bam ref/chr21.fasta cutesv/chr21.cutesv2.vcf ./cutesv/|
 |17 | 26 | 382 | 89% | 36% | 52% | cuteSV -t 12 --genotype --report_readid --min_support 3 --min_size 50 bam/mosaic_data_chr21.bam ref/chr21.fasta cutesv/chr21.cutesv2.vcf ./cutesv/|
 |18 | 55 | 278 | 85% | 53% | 66% | SURVIVOR merge samples.txt 1000 1 1 0 0 50|
@@ -241,8 +242,25 @@ We re-aligned to the T2T-CHM13 reference genome to evaluate the effect of the re
 ![igv](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/docs/reg1.t2t.png)
 ![igv](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/docs/notcalled1.png)
 
-#### **Validation**
-🚧
+#### **Future perspectives**
+##### FN
+![s1](https://github.com/collaborativebioinformatics/Mosaicome/docs/hack-fn-filt_S1.png)
+
+
+#####FP
+ - better clustering  +++
+ - Low support -> only PRECISE -> strict SVDEV LEN/POS -> stricter MAPQ!
+ - check splits better
+ - 2 alleles?
+ - aligment error/repetitive sequnce?
+
+![clust1](https://github.com/collaborativebioinformatics/Mosaicome/docs/hack-fp-2improve_08-bench_c_aln.png)
+![clust2](https://github.com/collaborativebioinformatics/Mosaicome/docs/hack-fp-2improve_05.png)
+![2alleles1](https://github.com/collaborativebioinformatics/Mosaicome/docs/hack-fp-2improve_06.png)
+![2alleles2](https://github.com/collaborativebioinformatics/Mosaicome/docs/hack-fp-2improve_07-GOLD.png)
+![aln1](https://github.com/collaborativebioinformatics/Mosaicome/docs/hack-fp-2improve_04.png)
+![aln2](https://github.com/collaborativebioinformatics/Mosaicome/docs/hack-fp-2improve_09-bench_v_aln.png)
+
 
 ---
 
