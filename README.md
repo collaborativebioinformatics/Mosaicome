@@ -247,7 +247,7 @@ We re-aligned to the T2T-CHM13 reference genome to evaluate the effect of the re
 ![s1](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/docs/hack-fn-filt_S1.png)
 
 
-#####FP
+##### FP
  - better clustering  +++
  - Low support -> only PRECISE -> strict SVDEV LEN/POS -> stricter MAPQ!
  - check splits better
