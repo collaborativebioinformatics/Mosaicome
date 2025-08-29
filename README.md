@@ -214,9 +214,9 @@ We tested other tools (cuteSV) and compared to the benchmark set
 |SURVIVOR merge | v1.0.7 | 55 | 278 | 85% | 53% | 66% | Sniffles default with cute SV (All)| 
 ### Comparing Sniffles FNs vs. cuteSV FNs (before and after filtering):
 
-251 FNs are common between Sniffles and cuteSV (All SVs)
-42 FNs are common between Sniffles with cuteSV (PASS SVs only). 
-4 FNs are not called by Sniffles only.  
+- 251 FNs are common between Sniffles and cuteSV (All SVs)
+- 42 FNs are common between Sniffles with cuteSV (PASS SVs only). 
+- 4 FNs are not called by Sniffles only.  
 ![igv](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/docs/FNs.png)
 
 
