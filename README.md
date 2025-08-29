@@ -150,8 +150,6 @@ We examined the fraction of reads around the breakpoint with at least one insert
   <img src="docs/ins_prev.png" width="49%" alt="INS: insertion prevalence in windows (outside BP)">
   <img src="docs/ins_kde.png"  width="49%" alt="INS: insertion prevalence in windows — KDE density">
 </p>
-::contentReference[oaicite:0]{index=0}
-
 
 
 #### **Development**
