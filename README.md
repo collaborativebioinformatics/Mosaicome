@@ -88,7 +88,7 @@ Our progress will be tracked through the following key phases and milestones.
 | :---: | :----: | ------------------------------------------------------------------------------ |
 | **1** |  `⏳`  | **Exploration & Strategy** <br> ⚫ Data Analysis <br> ⚫ Steps |
 | **2** |  `⚪`  | **Development & Prototyping** <br> ⚫ Steps <br> ⚫ Steps |
-| **3** |  `⚪`  | **Refinement & Validation** <br> ⚫ Stepsg <br> ⚫ Validation <br> ⚫ Final Documentation |
+| **3** |  `⚪`  | **Refinement & Validation** <br> ⚫ Steps <br> ⚫ Validation <br> ⚫ Final Documentation |
 
 *Status Key: `⚪` Not Started, `⏳` In Progress, `✅` Completed*
 
