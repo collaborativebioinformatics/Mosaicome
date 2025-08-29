@@ -196,7 +196,7 @@ We tested multiple filters from Sniffles2
 
 
 #### Other SV calling tools
-We tested other tools (CuteSV) to compare the results from the benchmark
+We tested other tools (cuteSV) to compare the results from the benchmark
 
 |Tool | version | FP | FN | Precision | Recall | F1 | Notes |
 |-----|---------|----|----|-----------|--------|----|-------|
