@@ -208,23 +208,27 @@ We tested multiple filters from Sniffles2
 
 
 #### Other SV calling tools
-We tested other tools (cuteSV) to compare the results from the benchmark
+We tested other tools (cuteSV) and compared to the benchmark set
 
 |Tool | version | FP | FN | Precision | Recall | F1 | Notes |
 |-----|---------|----|----|-----------|--------|----|-------|
 |cuteSV | v2.1.2 |  84  |  267 |  80% |  55% | 65% |All SVs are included| 
 |cuteSV | v2.1.2  |   26  |  382  | 89% |  36% |  52% |Only PASS SVs are included | 
 |SURVIVOR merge | v1.0.7 | 55 | 278 | 85% | 53% | 66% | Sniffles default with cute SV (All)| 
+### Comparing Sniffles FNs vs. cuteSV FNs (before and after filtering):
+
+- 251 FNs are common between Sniffles and cuteSV (All SVs)
+- 42 FNs are common between Sniffles with cuteSV (PASS SVs only). 
+- 4 FNs are not called by Sniffles only.  
 
 #### BAM-derived feature extraction (no re-calling Sniffles)
 To study why certain truth SVs were missed (FN) and how detected SVs (TP) differ, we extract quantitative evidence directly from the BAM around each breakpoint—without re-calling Sniffles.
 Rather than re-calling Sniffles at candidate sites, we built a BAM-only feature extractor around breakpoints (and with adaptive windows) that outputs per-SV aggregates and optional per-read details: depth at edges and inside, read composition, robust MAPQ stats, an identity proxy from `NM`, soft-clip burden and breakpoint-specific soft-clip fractions, split-read prevalence (`SA:Z`), indel load per kb, and strand balance. These tables are now the substrate for PCA/ML and principled tuning of mapping/calling parameters, with a quick interpretation rubric for DEL/INS and for understanding typical FN signatures.
 
 #### Re-alignment to T2T to study FN
-Re-alignment to T2T. Then we examined a couple of regions that were classified as false negatives (deletion) from Sniffles/hg38. 
-See the bottom figure, only one read has this deletion.
-Top figure: hg38 region and Middle figure: T2t region
-
+We re-aligned to the T2T-CHM13 reference genome to evaluate the effect of the reference genome on SV calling. Then we examined a couple of regions that were classified as false negatives (deletion) from Sniffles with hg38. 
+- The bottom figure shows a false negative deletion from Sniffles/hg38 that is supported by only one read.
+- The top and middle figures show the hg38 and T2T regions, respectively. 
 ![igv](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/docs/reg1.hg38.png)
 ![igv](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/docs/reg1.t2t.png)
 ![igv](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/docs/notcalled1.png)
