@@ -140,6 +140,19 @@ There’s a clear **negative relationship**: when coverage ratio drops (<0.8), t
   <img src="docs/deletion_ratio_mean.png" width="49%" alt="Coverage ratio vs interval-to-flanks deletion fraction ratio">
 </p>
 
+#### **INS — Insertion prevalence in windows (outside BP)**
+
+We examined the fraction of reads around the breakpoint with at least one insertion.
+**Plots:** Left = histogram. Right = KDE density (area≈1 per group). We note a pattern of **TP** shift to **high prevalence (≈0.7–1.0)**, while **FN** cluster **lower (≈0–0.4)**. Mann–Whitney U **p = 0.003** indicates a significant difference between TP and FN; with a higher median in TP (+0.156), insertion prevalence near the breakpoint is a useful discriminator of true INS in this dataset.
+
+
+<p float="left">
+  <img src="docs/ins_prev.png" width="49%" alt="INS: insertion prevalence in windows (outside BP)">
+  <img src="docs/ins_kde.png"  width="49%" alt="INS: insertion prevalence in windows — KDE density">
+</p>
+::contentReference[oaicite:0]{index=0}
+
+
 
 #### **Development**
 Below is a comparison of SV calling results between using **all mapped reads (QV > 10)** and restricting the analysis to **reads with Phred quality > 20**.
