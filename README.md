@@ -117,8 +117,11 @@ we observed that the quality of ONT reads plays a crucial role.
 #### **Region analysis of FN vs TP**
 
 #### QC — MAPQ Distribution
-TP reads cluster tightly near **MAPQ≈60**, while FN shows a bimodal mix with a **large peak near 0** and a smaller one near 60. Means diverge (**FN≈39** vs **TP≈57**; medians ≈60 for both) with **p ≪ 1e-10** for Mann–Whitney and Welch’s t-test. We see many FNs come from **low/ambiguous mappings**. MAPQ-based filtering or re-alignment could recover signal. And that's what we tried below!!
-![MAPQ Distribution: TP vs FN](docs/mapq.png)
+
+![MAPQ Distribution: TP vs FN](docs/mapq_analysis_4panel_comparison.png)
+
+**(1)** In the original alignment FN is bimodal with a large low-MAPQ mode near 0, and means between FN and TP differ a lot (Δμ≈18): **many FN come from ambiguous/poor alignments**. **(2)** When we remove low-MAPQ reads (as Sniffles does) the separation collapses: so at **loci where most evidence lives in MAPQ<20**, Sniffles effectively sees little or nothing, so those sites become FN. A residual subset of FNs still has high-MAPQ reads. **(3)** Re-aligning with Q20 reads shrinks the low-MAPQ tail dramatically, which means base-quality filtering cleans much of the ambiguity even before MAPQ gating. **(4)** If we aditionally filter by MAPQ, the distributions are almost indistinguishable. **The conclusion:** A key driver of FN vs TP in MAPQ is the low-MAPQ mass present in the original alignment; once you gate MAPQ>20 (and/or re-align with Q20 reads), the difference largely vanishes.
+
 
 #### DELs — Coverage in interval vs flanks
 
