@@ -253,12 +253,12 @@ We re-aligned to the T2T-CHM13 reference genome to evaluate the effect of the re
  - 2 alleles?
  - aligment error/repetitive sequnce?
 
-![clust1](https://github.com/collaborativebioinformatics/Mosaicome/docs/hack-fp-2improve_08-bench_c_aln.png)
-![clust2](https://github.com/collaborativebioinformatics/Mosaicome/docs/hack-fp-2improve_05.png)
-![2alleles1](https://github.com/collaborativebioinformatics/Mosaicome/docs/hack-fp-2improve_06.png)
-![2alleles2](https://github.com/collaborativebioinformatics/Mosaicome/docs/hack-fp-2improve_07-GOLD.png)
-![aln1](https://github.com/collaborativebioinformatics/Mosaicome/docs/hack-fp-2improve_04.png)
-![aln2](https://github.com/collaborativebioinformatics/Mosaicome/docs/hack-fp-2improve_09-bench_v_aln.png)
+![clust1](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/docs/hack-fp-2improve_08-bench_c_aln.png)
+![clust2](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/docs/hack-fp-2improve_05.png)
+![2alleles1](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/docs/hack-fp-2improve_06.png)
+![2alleles2](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/docs/hack-fp-2improve_07-GOLD.png)
+![aln1](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/docs/hack-fp-2improve_04.png)
+![aln2](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/docs/hack-fp-2improve_09-bench_v_aln.png)
 
 
 ---
