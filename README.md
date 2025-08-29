@@ -226,8 +226,8 @@ Rather than re-calling Sniffles at candidate sites, we built a BAM-only feature 
 
 #### Re-alignment to T2T to study FN
 We re-aligned to the T2T-CHM13 reference genome to evaluate the effect of the reference genome on SV calling. Then we examined a couple of regions that were classified as false negatives (deletion) from Sniffles with hg38. 
-The bottom figure shows a false negative deletion from Sniffles/hg38 that is supported by only one read.
-The top and middle figures show the hg38 and T2T regions, respectively. 
+- The bottom figure shows a false negative deletion from Sniffles/hg38 that is supported by only one read.
+- The top and middle figures show the hg38 and T2T regions, respectively. 
 ![igv](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/docs/reg1.hg38.png)
 ![igv](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/docs/reg1.t2t.png)
 ![igv](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/docs/notcalled1.png)
