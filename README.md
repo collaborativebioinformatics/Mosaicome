@@ -217,8 +217,6 @@ We tested other tools (cuteSV) and compared to the benchmark set
 - 251 FNs are common between Sniffles and cuteSV (All SVs)
 - 42 FNs are common between Sniffles with cuteSV (PASS SVs only). 
 - 4 FNs are not called by Sniffles only.  
-![igv](https://github.com/collaborativebioinformatics/Mosaicome/blob/main/docs/FNs_venn.png)
-
 
 #### BAM-derived feature extraction (no re-calling Sniffles)
 To study why certain truth SVs were missed (FN) and how detected SVs (TP) differ, we extract quantitative evidence directly from the BAM around each breakpoint—without re-calling Sniffles.
