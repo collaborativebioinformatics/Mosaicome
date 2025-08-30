@@ -8,7 +8,7 @@
 
 ---
 
-A central repository for **Team Mosaicome**'s project for the **Mosaic SV ROM Collaborative Bioinformatics SVM Hackathon**. Our goal is to develop an pipeline for the accurate detection of genomic structural variations.
+A central repository for **Team Mosaicome**'s project for the **Mosaic SV ROM Collaborative Bioinformatics SVM Hackathon**. Our goal is to develop a pipeline for the accurate detection of genomic structural variations.
 
 ### **Table of Contents**
 1. [The team](#-the-team)
