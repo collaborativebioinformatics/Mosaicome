@@ -43,7 +43,7 @@ RUN echo ". $CONDA_DIR/etc/profile.d/conda.sh" >> /etc/bash.bashrc
 
 # python pkgs
 #RUN python3 -m venv 0env && source 0env/bin/activate && \
-RUN python3 -m pip install --upgrade pip setuptools wheel && python3 -m pip install --no-cache-dir numpy pandas matplotlib 
+RUN conda create --name mosaicome bioconda::winnowmap bioconda::sniffles bioconda::samtools bioconda::bcftools bioconda::truvari bioconda::minimap2
 
 SHELL ["/bin/bash", "--login", "-c"]
 # python shell
