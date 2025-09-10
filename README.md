@@ -210,6 +210,7 @@ We tested multiple filters from Sniffles2
 |17 | 26 | 382 | 89% | 36% | 52% | cuteSV -t 12 --genotype --report_readid --min_support 3 --min_size 50 bam/mosaic_data_chr21.bam ref/chr21.fasta cutesv/chr21.cutesv2.vcf ./cutesv/|
 |18 | 55 | 278 | 85% | 53% | 66% | SURVIVOR merge samples.txt 1000 1 1 0 0 50|
 |19 | 41 | 281 | 88.58% | 53.09% | 66.39% | "reads Q20 +minimap2 lr:hq  +  --mosaic-af-min 0.01 --minsupport 3 --mapq 18 (USER) +  mosaic_min_reads = 2 for DEL and INS (INTERNAL) if (precise sd_len and sd_pos is low) +  minsvlen FILTER deactivated if SUPPORT >= 10 (INTERNAL)"|
+|20 | 29 | 321 | 90.55% | 46.41% | 61.37% | "reads Q20 +minimap2 lr:hq + default sniffles" |
 
 <img width="1389" height="690" alt="image" src="https://github.com/user-attachments/assets/566305cd-254a-4f67-8098-304f9abbf71a" />
 <img width="1390" height="690" alt="image" src="https://github.com/user-attachments/assets/81fbc41f-47af-44ef-aa7e-b96bced85390" />
